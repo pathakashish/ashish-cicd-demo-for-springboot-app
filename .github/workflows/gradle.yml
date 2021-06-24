@@ -47,7 +47,7 @@ jobs:
     - name: Run the unit tests
       run: ./gradlew test
 
-packageAndDeploy:
+  packageAndDeploy:
     needs: [build, test]
     runs-on: ubuntu-latest
 
@@ -61,11 +61,12 @@ packageAndDeploy:
         restore-keys: |
           app-jar-${{ github.sha }}}
     - name: Build the docker image
-      run: docker build --iidfile image.txt --build-arg JAR_FILE=build/libs/ashish-cicd-demo-0.0.1-SNAPSHOT.jar -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web:${GITHUB_SHA} .
-    - name: Login to docker registry
-      run: docker login --username=_ --password=${{ secrets.HEROKU_TOKEN }} registry.heroku.com
-    - name: Patch the container
-      run: |
-        curl -X PATCH https://api.heroku.com/apps/${{ secrets.HEROKU_APP_NAME }}/formation --header "ContentType: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-release" --header "Authorization: Bearer ${{ secrets.HEROKU_TOKEN }}" --data '{"updates": [{"type":"web", "docker_image": "'$(cat image.txt)'"}]}'
+      run: docker build --iidfile image.txt --build-arg JAR_FILE=build/libs/ashish-cicd-demo-0.0.1-SNAPSHOT.jar -t registry.heroku.com/heroku-app-name/web:${GITHUB_SHA} .
+#       run: docker build --iidfile image.txt --build-arg JAR_FILE=build/libs/ashish-cicd-demo-0.0.1-SNAPSHOT.jar -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web:${GITHUB_SHA} .
+#     - name: Login to docker registry
+#       run: docker login --username=_ --password=${{ secrets.HEROKU_TOKEN }} registry.heroku.com
+#     - name: Patch the container
+#       run: |
+#         curl -X PATCH https://api.heroku.com/apps/${{ secrets.HEROKU_APP_NAME }}/formation --header "ContentType: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-release" --header "Authorization: Bearer ${{ secrets.HEROKU_TOKEN }}" --data '{"updates": [{"type":"web", "docker_image": "'$(cat image.txt)'"}]}'
         
         
