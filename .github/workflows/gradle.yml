@@ -60,7 +60,7 @@ jobs:
           restore-keys: |
             demo-app-jar-${{ github.sha }}
       - name: Build the docker image
-        run: docker build --iidfile image.txt --build-args JAR_FILE=build/libs/ashish-cicd-demo-0.0.1-SNAPSHOT.jar -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web:${GITHUB_SHA} .
+        run: docker build --iidfile image.txt --build-arg JAR_FILE=build/libs/ashish-cicd-demo-0.0.1-SNAPSHOT.jar -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web:${GITHUB_SHA} .
       - name: Login to the docker registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_TOKEN }} registry.heroku.com
       - name: Push the docker image to heroku registry
