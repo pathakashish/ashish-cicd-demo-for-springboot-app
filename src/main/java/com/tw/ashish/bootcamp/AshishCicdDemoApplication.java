@@ -15,6 +15,6 @@ public class AshishCicdDemoApplication {
 
 	@GetMapping(value = "/")
 	public String homepage() {
-		return "<h1>My fancy homepage! More secured!!!</h1>";
+		return "<h1>My fancy homepage! More secured!!! And new.</h1>";
 	}
 }
