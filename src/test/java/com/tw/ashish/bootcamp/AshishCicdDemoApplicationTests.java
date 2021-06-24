@@ -7,7 +7,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 class AshishCicdDemoApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void test() {
+	}
+
+	@Test
+	void anotherTest() {
+	}
+
+	@Test
+	void yetAnotherTest() {
 	}
 
 }
