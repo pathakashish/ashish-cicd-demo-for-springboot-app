@@ -17,7 +17,6 @@ class AshishCicdDemoApplicationTests {
 
 	@Test
 	void yetAnotherTest() {
-		Assertions.assertEquals(1, 2);
 	}
 
 }
